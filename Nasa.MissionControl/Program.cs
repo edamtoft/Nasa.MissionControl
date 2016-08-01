@@ -8,7 +8,7 @@ namespace Nasa.MissionControl
     static void Main(string[] args)
     {
       var config = new Config { };
-      //var config = new Config { InputFile = "input.txt", OutputFile = "output.txt", GraphicOutput = true };
+      //var config = new Config { InputFile = null, OutputFile = null, GraphicOutput = true, NoPrompts = false };
 
       config.Execute<IMission>(mission =>
       {

@@ -19,6 +19,7 @@ namespace Nasa.MissionControl
     public string OutputFile { get; set; }
     public bool GraphicOutput { get; set; }
     public int AnimationSpeed { get; set; } = 500;
+    public bool NoPrompts { get; set; }
 
     protected override void Load(ContainerBuilder builder)
     {
@@ -30,10 +31,20 @@ namespace Nasa.MissionControl
           .As<IWritable>()
           .SingleInstance();
 
-        builder
-          .RegisterType<MissionControlTransciever>()
-          .As<IMissionTransciever>()
-          .SingleInstance();
+        if (NoPrompts)
+        {
+          builder
+           .RegisterType<ProgrammableTransciever>()
+           .As<IMissionTransciever>()
+           .SingleInstance();
+        }
+        else
+        {
+          builder
+           .RegisterType<MissionControlTransciever>()
+           .As<IMissionTransciever>()
+           .SingleInstance();
+        }
       }
       else
       {
